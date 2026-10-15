@@ -678,20 +678,14 @@ pub fn run_gui(cli: crate::cli::Cli) -> anyhow::Result<()> {
         .with_min_inner_size([1100.0, 700.0])
         .with_resizable(true);
 
-    // winit ждёт сырой RGBA, а не PNG — читаем заранее распакованный буфер.
-    for size in [128u32, 64, 32, 16] {
-        let path = format!("assets/icons/icon-{size}.rgba");
-        if let Ok(rgba) = std::fs::read(&path) {
-            if rgba.len() == (size * size * 4) as usize {
-                viewport = viewport.with_icon(egui::IconData {
-                    rgba,
-                    width: size,
-                    height: size,
-                });
-                break;
-            }
-        }
-    }
+    // Иконка встроена в бинарь: иначе на Windows exe запущенный из чужой
+    // директории не найдёт assets/ по относительному пути.
+    const ICON_128: &[u8] = include_bytes!("../../assets/icons/icon-128.rgba");
+    viewport = viewport.with_icon(egui::IconData {
+        rgba: ICON_128.to_vec(),
+        width: 128,
+        height: 128,
+    });
 
     let options = eframe::NativeOptions {
         viewport,
