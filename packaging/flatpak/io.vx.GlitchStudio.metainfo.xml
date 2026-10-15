@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.vx.GlitchStudio</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+
+  <name>Glitch Studio</name>
+  <summary>Порча фото и видео в стиле glitchcore</summary>
+
+  <description>
+    <p>
+      Десктопный редактор для намеренной порчи фото и видео в стиле glitchcore.
+      Тридцать эффектов, стек с перетаскиванием порядка, десять тем Material You
+      и полностью воспроизводимый результат: один seed — один и тот же глитч.
+    </p>
+    <p>Особенности:</p>
+    <ul>
+      <li>RGB-split, pixel sort, datamosh, VHS-трекинг, CRT, bloom и другие</li>
+      <li>Стек эффектов с миксом, порядком и глобальным Chaos</li>
+      <li>Видео: MP4/WebM/GIF, звук сохраняется</li>
+      <li>Режим командной строки для пакетной обработки</li>
+    </ul>
+  </description>
+
+  <launchable type="desktop-id">glitch-studio.desktop</launchable>
+
+  <categories>
+    <category>Graphics</category>
+    <category>AudioVideo</category>
+  </categories>
+
+  <keywords>
+    <keyword>glitch</keyword>
+    <keyword>glitchcore</keyword>
+    <keyword>art</keyword>
+    <keyword>effects</keyword>
+  </keywords>
+
+  <requires>
+    <display_length compare="ge">768</display_length>
+  </requires>
+
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.0.1" date="2026-10-15">
+      <description>
+        <p>Первый публичный бета-релиз.</p>
+      </description>
+    </release>
+  </releases>
+</component>

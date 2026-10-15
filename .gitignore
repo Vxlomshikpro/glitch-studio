@@ -1,0 +1,30 @@
+# Сборка
+/target
+**/*.rs.bk
+
+# Демо-рендеры: это мой тестовый мусор, в репозитории ему не место
+/demo/
+/screenshots/
+
+# Сборка образов: AppDir и flatpak-песочница генерируются при сборке
+/build/
+/build-flatpak/
+/.flatpak-builder/
+# Статический ffmpeg весит 80 МБ на файл и качается при сборке flatpak
+/packaging/flatpak/ffmpeg
+/packaging/flatpak/ffprobe
+# Готовые образы не коммитим — они собираются из исходников в CI
+/dist/
+
+# Конфиг пользователя
+/settings.json
+
+# Системное
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Логи и временное
+*.log
+*.tmp

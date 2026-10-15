@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Glitch Studio
+GenericName=Редактор глитч-арта
+Comment=Намеренная порча фото и видео в стиле glitchcore
+Exec=glitch-studio
+Icon=glitch-studio
+Terminal=false
+Categories=Graphics;2DGraphics;RasterGraphics;Video;AudioVideo;AudioVideoEditing;
+Keywords=glitch;glitchcore;art;effects;video;image;destructive;
+StartupNotify=true
+StartupWMClass=glitch-studio
