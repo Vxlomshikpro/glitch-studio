@@ -35,7 +35,7 @@ pub fn ffmpeg_available() -> bool {
 }
 
 fn tool_ok(name: &str) -> bool {
-    Command::new(name)
+    Command::new(crate::video::bundled::tool_path(name))
         .arg("-version")
         .stdin(Stdio::null())
         .stdout(Stdio::null())
@@ -73,7 +73,7 @@ fn probe_video(path: &Path) -> Result<MediaInfo> {
     if !ffmpeg_available() {
         return Err(GlitchError::FfmpegMissing);
     }
-    let out = Command::new("ffprobe")
+    let out = Command::new(crate::video::bundled::tool_path("ffprobe"))
         .args([
             "-v",
             "quiet",

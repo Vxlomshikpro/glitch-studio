@@ -1,5 +1,6 @@
 //! Видео: probe, декодирование кадров, экспорт через ffmpeg.
 
+pub mod bundled;
 pub mod decoder;
 pub mod encoder;
 pub mod probe;

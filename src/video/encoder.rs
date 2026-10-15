@@ -301,7 +301,7 @@ impl Encoder {
             source,
         })?;
 
-        let mut cmd = Command::new("ffmpeg");
+        let mut cmd = Command::new(crate::video::bundled::tool_path("ffmpeg"));
         cmd.args([
             "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgba", "-s",
         ])

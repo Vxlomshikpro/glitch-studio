@@ -15,6 +15,7 @@
 /packaging/flatpak/ffprobe
 # Готовые образы не коммитим — они собираются из исходников в CI
 /dist/
+/dist/win-stage/
 
 # Конфиг пользователя
 /settings.json

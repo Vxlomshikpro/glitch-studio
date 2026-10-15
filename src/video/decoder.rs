@@ -41,7 +41,7 @@ impl VideoDecoder {
             source,
         })?;
 
-        let mut child = Command::new("ffmpeg")
+        let mut child = Command::new(crate::video::bundled::tool_path("ffmpeg"))
             .args(["-v", "error", "-noautorotate", "-i"])
             .arg(path)
             .args(["-f", "rawvideo", "-pix_fmt", "rgba", "-"])
@@ -161,7 +161,7 @@ pub fn grab_frame_at(path: &Path, seconds: f64) -> Result<Option<Frame>> {
     };
 
     // `output()` читает stdout и stderr параллельно — дедлока на stderr не будет.
-    let out = match Command::new("ffmpeg")
+    let out = match Command::new(crate::video::bundled::tool_path("ffmpeg"))
         .args(["-v", "error", "-noautorotate", "-ss"])
         .arg(format!("{t:.3}"))
         .arg("-i")
