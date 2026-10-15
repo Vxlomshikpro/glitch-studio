@@ -1,0 +1,30 @@
+// Ресурсы PE для Windows: иконка файла и версия продукта.
+1 ICON "glitch-studio.ico"
+
+1 VERSIONINFO
+FILEVERSION     0,0,1,0
+PRODUCTVERSION  0,0,1,0
+FILEFLAGSMASK   0x3fL
+FILEFLAGS       0x0L
+FILEOS          0x40004L
+FILETYPE        0x1L
+FILESUBTYPE     0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName",      "vxlomshikpro"
+            VALUE "FileDescription",  "Glitch Studio - редактор порчи фото и видео"
+            VALUE "FileVersion",      "0.0.1.0"
+            VALUE "InternalName",     "glitch-studio"
+            VALUE "OriginalFilename", "glitch-studio.exe"
+            VALUE "ProductName",      "Glitch Studio"
+            VALUE "ProductVersion",   "0.0.1.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END

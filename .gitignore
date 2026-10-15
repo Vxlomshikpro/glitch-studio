@@ -28,3 +28,5 @@ Thumbs.db
 # Логи и временное
 *.log
 *.tmp
+# Бинарники ffmpeg для Windows-сборки: 168 МБ каждый, в репозитории им не место
+/assets/binaries/

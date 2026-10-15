@@ -1,0 +1,4 @@
+# GUI-сборка под Windows идёт без консольного окна: -mwindows убирает
+# подсистему CUI и подставляет подсистему GUI в PE-заголовке.
+[target.x86_64-pc-windows-gnu]
+rustflags = ["-C", "link-arg=-mwindows"]

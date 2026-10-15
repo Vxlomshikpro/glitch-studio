@@ -697,7 +697,7 @@ pub fn run_gui(cli: crate::cli::Cli) -> anyhow::Result<()> {
     // Файл из командной строки открываем сразу после создания окна.
     let start_with = cli.input.clone();
 
-    eframe::run_native(
+    match eframe::run_native(
         "Glitch Studio",
         options,
         Box::new(move |_cc| {
@@ -707,9 +707,52 @@ pub fn run_gui(cli: crate::cli::Cli) -> anyhow::Result<()> {
             }
             Ok(Box::new(app) as Box<dyn eframe::App>)
         }),
-    )
-    .map_err(|e| anyhow::anyhow!("{e}"))?;
-    Ok(())
+    ) {
+        Ok(()) => Ok(()),
+        Err(e) => {
+            // «egl/не найден OpenGL» в виртуалке или на старой карте — самое
+            // частое. Молчаливый выход здесь недопустим: объясняем, что делать.
+            report_startup_failure(&e.to_string());
+            Err(anyhow::anyhow!("{e}"))
+        }
+    }
+}
+
+/// Показывает понятное окно с причиной, если окно не удалось открыть.
+fn report_startup_failure(msg: &str) {
+    let lowered = msg.to_ascii_lowercase();
+    let hint = if lowered.contains("opengl") {
+        "Нужен OpenGL 2.0 или новее.\n\nЧаще всего это значит, что программа запущена в виртуалке \
+         без 3D-ускорения, либо на машине с очень старой видеокартой.\n\nЧто делать:\n\
+         • В виртуалке включи 3D-ускорение (VirtualBox: Настройки → Видео).\n\
+         • Поставь свежий драйвер видеокарты.\n\
+         • Как обходной путь: используй версию для командной строки."
+    } else if lowered.contains("libfuse") {
+        "Не хватает FUSE для запуска AppImage."
+    } else {
+        "Смотри сообщение ниже."
+    };
+
+    let title = "Glitch Studio не смог запуститься";
+    let body = format!("{hint}\n\nТехнические детали:\n{msg}");
+
+    eprintln!("{title}\n{body}");
+
+    #[cfg(target_os = "windows")]
+    {
+        let _ = rfd::MessageDialog::new()
+            .set_title(title)
+            .set_description(&body)
+            .set_buttons(rfd::MessageButtons::Ok)
+            .show();
+    }
+
+    #[cfg(not(target_os = "windows"))]
+    {
+        // На других системах окно покажет терминал, но и без GUI-диалога
+        // текст ошибки полезнее, чем ничего.
+        let _ = (title, body);
+    }
 }
 
 struct GlitchApp {
